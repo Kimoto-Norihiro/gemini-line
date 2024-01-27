@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 
@@ -16,10 +17,10 @@ type Setting struct {
 }
 
 func LoadSetting() (*Setting, error) {
-	path := filepath.Join(".env")
+	path := filepath.Join("..","..",".env")
 	err := godotenv.Load(path)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to load .env file: %w", err)
 	}
 
 	return &Setting{
