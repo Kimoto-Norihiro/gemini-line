@@ -7,7 +7,9 @@ import (
 	"google.golang.org/api/option"
 )
 
-type Gemini interface{}
+type Gemini interface{
+	GenContent(ctx context.Context, chatText string) ([]string, error)
+}
 
 type gemini struct {
 	client *genai.Client
@@ -33,12 +35,12 @@ func (g *gemini) GenContent(ctx context.Context, chatText string) ([]string, err
 	if err != nil {
 		return nil, err
 	}
-	respStr := ContentResToStrings(resp)
+	respStr := contentResToStrings(resp)
 
 	return respStr, nil
 }
 
-func ContentResToStrings(resp *genai.GenerateContentResponse) []string {
+func contentResToStrings(resp *genai.GenerateContentResponse) []string {
 	var res []string
 	for _, cand := range resp.Candidates {
 		if cand.Content != nil {

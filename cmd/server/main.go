@@ -14,7 +14,7 @@ func main() {
 		fmt.Println(err)
 	}
 
-	linebot, err := linebot.NewLineBot(setting.ChannelAccessToken, setting.ChannelSecret)
+	linebot, err := linebot.NewLineBot(setting.ChannelAccessToken, setting.ChannelSecret, setting.GeminiApiKey)
 	if err != nil {
 		fmt.Println(err)
 	}
